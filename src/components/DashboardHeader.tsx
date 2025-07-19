@@ -24,9 +24,9 @@ export default function DashboardHeader() {
   return (
     <div className="mb-8">
       <p className="text-sm text-gray-500 mb-2">{getCurrentDate()}</p>
-      <h1 className="text-3xl font-bold text-gray-900">
+      <h2 className="text-3xl text-gray-900 font-bold">
         {getGreeting()} {user?.name || 'User'},
-      </h1>
+      </h2>
     </div>
   );
 } 
