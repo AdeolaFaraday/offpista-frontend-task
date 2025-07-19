@@ -5,6 +5,7 @@ import InsightsPanel from '../components/InsightsPanel';
 import TaskFormModal from '../components/TaskFormModal';
 import DashboardHeader from '../components/DashboardHeader';
 import useDashboard from '../hooks/useDashboard';
+import { Plus } from 'lucide-react';
 
 
 export default function Dashboard() {
@@ -30,24 +31,34 @@ export default function Dashboard() {
 
   return (
     <DashboardLayout>
-      <div className="flex flex-col md:flex-row gap-8">
-        <div className="flex-1">
-          <DashboardHeader />
-          <div className="flex items-center justify-between mb-4">
-            <FilterTabs value={filter} onChange={setFilter} />
-            <button onClick={handleAdd} className="bg-green-500 text-white px-6 py-2 rounded-2xl shadow-md hover:bg-green-600 transition">Add Task</button>
-          </div>
-          <TaskTable
-            tasks={tasks || []}
-            total={metadata?.pages?.[0]?.total || 0}
-            onEdit={handleEdit}
-            onLoadMore={handleLoadMore}
-            hasMore={hasNextPage}
-            loading={isLoading}
-          />
-        </div>
+      <div className="">
+        <DashboardHeader />
+
         <InsightsPanel insights={insights} />
+
+        <div className="mb-6">
+          <FilterTabs value={filter} onChange={setFilter} />
+        </div>
+
+        <TaskTable
+          tasks={tasks || []}
+          total={metadata?.pages?.[0]?.total || 0}
+          onEdit={handleEdit}
+          onLoadMore={handleLoadMore}
+          hasMore={hasNextPage}
+          loading={isLoading}
+        />
       </div>
+
+      {/* Floating Action Button */}
+      <button 
+        onClick={handleAdd} 
+        className="fixed bottom-6 right-6 w-14 h-14 bg-green-500 text-white rounded-full shadow-lg hover:bg-green-600 transition-all duration-200 flex items-center justify-center z-50 hover:scale-110"
+        aria-label="Add new task"
+      >
+        <Plus size={24} />
+      </button>
+
       {modalOpen && (
         <TaskFormModal
           open={modalOpen}
