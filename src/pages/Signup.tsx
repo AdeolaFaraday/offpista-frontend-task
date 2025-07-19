@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import useSignup from '../hooks/useSignup';
 import Input from '../components/common/input';
+import Button from '../components/common/button';
 
 const signupSchema = z.object({
   name: z.string().min(2, 'Name is required'),
@@ -36,13 +37,7 @@ export default function Signup() {
         <Input label="Name" name="name" type="text" placeholder="Your Name" register={register} error={errors.name?.message} />
         <Input label="Email" name="email" type="email" placeholder="you@email.com" register={register} error={errors.email?.message} />
         <Input label="Password" name="password" type="password" placeholder="Password" register={register} error={errors.password?.message} />
-        <button
-          type="submit"
-          className="w-full bg-blue-600 text-white py-3 rounded-2xl font-semibold shadow-md hover:bg-blue-700 transition"
-          disabled={isPending}
-        >
-          {isPending ? 'Signing up...' : 'Create Account'}
-        </button>
+        <Button type="submit" disabled={isPending} loading={isPending}>Create Account</Button>
       </form>
     </div>
   );

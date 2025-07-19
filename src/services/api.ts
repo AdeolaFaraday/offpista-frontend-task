@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://localhost:5000', // Change to your backend URL
+  baseURL: 'https://offpista-backend-task.onrender.com',
 });
 
 api.interceptors.request.use(

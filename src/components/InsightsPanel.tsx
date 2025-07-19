@@ -1,14 +1,7 @@
-import { useQuery } from '@tanstack/react-query';
-import api from '../services/api';
 
-export default function InsightsPanel() {
-  const { data } = useQuery({
-    queryKey: ['insights'],
-    queryFn: () => api.get('/tasks/insights'),
-  });
-  const insights = data?.data || {};
+export default function InsightsPanel({ insights }: { insights: any }) {
   return (
-    <div className="bg-white rounded-2xl shadow-md p-6 flex flex-col gap-y-2 w-full md:w-80">
+    <div className="bg-white h-[calc(100vh-10rem)] rounded-2xl shadow-md p-6 flex flex-col gap-y-2 w-full md:w-80">
       <h4 className="text-lg font-bold text-gray-800 mb-2">Task Insights</h4>
       <div className="flex flex-col gap-y-1">
         <div className="flex justify-between"><span>Total</span><span className="font-semibold">{insights?.totalTasks || 0}</span></div>

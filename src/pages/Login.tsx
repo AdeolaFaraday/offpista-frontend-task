@@ -1,8 +1,9 @@
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import useLogin from '../hooks/useSigin';
+import useLogin from '../hooks/useLogin';
 import Input from '../components/common/input';
+import Button from '../components/common/button';
 
 const loginSchema = z.object({
   email: z.string().email('Invalid email'),
@@ -34,13 +35,7 @@ export default function Login() {
         <h2 className="text-2xl font-bold text-blue-600 mb-2 text-center">Login</h2>
         <Input label="Email" name="email" type="email" placeholder="you@email.com" register={register} error={errors.email?.message} />
         <Input label="Password" name="password" type="password" placeholder="Password" register={register} error={errors.password?.message} />
-        <button
-          type="submit"
-          className="w-full bg-blue-600 text-white py-3 rounded-2xl font-semibold shadow-md hover:bg-blue-700 transition"
-          disabled={isPending}
-        >
-          {isPending ? 'Logging in...' : 'Login'}
-        </button>
+        <Button type="submit" disabled={isPending} loading={isPending}>Login</Button>
       </form>
     </div>
   );

@@ -1,7 +1,7 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import api from '../services/api';
 
-const PAGE_SIZE = 10;
+const PAGE_SIZE = 7;
 
 export const useGetTask = (status?: string) => {
   const {
@@ -22,7 +22,7 @@ export const useGetTask = (status?: string) => {
     },
     initialPageParam: 1,
     getNextPageParam: (lastPage: any, allPages) => {
-      if (lastPage.hasMore) {
+      if (lastPage.totalPages > lastPage.page) {
         return allPages.length + 1;
       }
       return undefined;
@@ -36,6 +36,7 @@ export const useGetTask = (status?: string) => {
     tasks,
     isLoading,
     error,
+    metadata: data,
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,

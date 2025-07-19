@@ -1,10 +1,11 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import { useEffect, Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Input from './common/input';
 import Select from './common/select';
+import Button from './common/button';
 
 
 const taskSchema = z.object({
@@ -44,9 +45,10 @@ interface TaskFormModalProps {
   onClose: () => void;
   onSubmit: (form: any) => void;
   initialData?: any;
+  loading?: boolean;
 }
 
-export default function TaskFormModal({ open, onClose, onSubmit, initialData }: TaskFormModalProps) {
+export default function TaskFormModal({ open, onClose, onSubmit, initialData, loading }: TaskFormModalProps) {
   const { register, handleSubmit, formState: { errors }, setValue } = useForm<TaskForm>({
     resolver: zodResolver(taskSchema),
     defaultValues: {
@@ -98,12 +100,7 @@ export default function TaskFormModal({ open, onClose, onSubmit, initialData }: 
                 </div>
                 <Input name="dueDate" type="date" placeholder="Due Date" register={register} error={errors.dueDate?.message} />
                 <Input name="tags" type="text" placeholder="Tags (comma separated)" register={register} error={errors.tags?.message} />
-                <button
-                  type="submit"
-                  className="w-full bg-blue-600 text-white py-3 rounded-2xl font-semibold shadow-md hover:bg-blue-700 transition mt-2"
-                >
-                  {initialData ? 'Update Task' : 'Add Task'}
-                </button>
+                <Button type="submit" disabled={loading} loading={loading}>{initialData ? 'Update Task' : 'Add Task'}</Button>
               </form>
             </Dialog.Panel>
           </Transition.Child>
