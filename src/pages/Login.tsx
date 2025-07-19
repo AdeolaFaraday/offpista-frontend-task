@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { Link } from 'react-router-dom';
 import useLogin from '../hooks/useLogin';
 import Input from '../components/common/input';
 import Button from '../components/common/button';
@@ -36,6 +37,19 @@ export default function Login() {
         <Input label="Email" name="email" type="email" placeholder="you@email.com" register={register} error={errors.email?.message} />
         <Input label="Password" name="password" type="password" placeholder="Password" register={register} error={errors.password?.message} />
         <Button type="submit" disabled={isPending} loading={isPending}>Login</Button>
+        
+        {/* Sign up link */}
+        <div className="text-center mt-4">
+          <p className="text-gray-600 text-sm">
+            Don't have an account?{' '}
+            <Link 
+              to="/signup" 
+              className="text-blue-600 hover:text-blue-700 font-medium transition-colors duration-200"
+            >
+              Sign up here
+            </Link>
+          </p>
+        </div>
       </form>
     </div>
   );
