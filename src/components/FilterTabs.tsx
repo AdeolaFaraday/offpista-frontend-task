@@ -9,7 +9,7 @@ const filters = [
   { value: 'all', label: 'All Tasks', icon: '📋' },
   { value: 'pending', label: 'Pending', icon: '⏳' },
   { value: 'in-progress', label: 'In Progress', icon: '🔄' },
-  { value: 'completed', label: 'Completed', icon: '✅' },
+  { value: 'done', label: 'Completed', icon: '✅' },
 ];
 
 export default function FilterTabs({ value, onChange }: FilterTabsProps) {
